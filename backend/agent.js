@@ -53,7 +53,7 @@ ${searchContent}
 Based on these results, provide:
 1. Some descriptive information about the company (Overview, main products/services, and size/financials if available).
 2. A clear investment decision (either "INVEST" or "PASS").
-3. A smart reason for this decision.
+3. A good reason for this decision.
 
 Output a JSON object exactly matching this schema:
 {
@@ -71,41 +71,58 @@ Do not include any other text besides the JSON.`;
   let decision = "";
   let reasoning = "";
 
+  // Helper to escape raw newlines inside double-quoted values in JSON
+  const escapeNewlinesInStrings = (str) => {
+    let inString = false;
+    let res = '';
+    for (let i = 0; i < str.length; i++) {
+      const c = str[i];
+      if (c === '"' && (i === 0 || str[i - 1] !== '\\')) {
+        inString = !inString;
+      }
+      if (inString && c === '\n') {
+        res += '\\n';
+      } else if (inString && c === '\r') {
+        // Skip carriage return
+      } else {
+        res += c;
+      }
+    }
+    return res;
+  };
+
   try {
     const jsonRegex = /\{[\s\S]*\}/;
     const match = content.match(jsonRegex);
     if (match) {
-      const parsed = JSON.parse(match[0]);
-      companyInfo = parsed.companyInfo || "";
-      decision = parsed.decision || "";
-      reasoning = parsed.reasoning || "";
+      const cleanedJson = escapeNewlinesInStrings(match[0]);
+      const parsed = JSON.parse(cleanedJson);
+      companyInfo = parsed.companyInfo || parsed.company_info || parsed.CompanyInfo || "";
+      decision = parsed.decision || parsed.recommendation || parsed.Decision || "";
+      reasoning = parsed.reasoning || parsed.thesis || parsed.Reasoning || "";
     }
   } catch (e) {
-    console.warn("⚠️ JSON parse failed, falling back to regex extraction.");
+    console.warn("⚠️ JSON parse failed: " + e.message);
   }
 
-  // Regex Extraction Fallback for each field if parsing was incomplete
+  // Regex Extraction Fallback for each field if parsing was incomplete or returned empty
   if (!companyInfo.trim()) {
-    const match = content.match(/"companyInfo"\s*:\s*"([\s\S]*?)"(?=\s*,\s*"|\s*\})/);
+    const match = content.match(/"companyInfo"\s*:\s*"([\s\S]*?)"/i) || 
+                  content.match(/"company_info"\s*:\s*"([\s\S]*?)"/i);
     companyInfo = match ? match[1] : "";
   }
   if (!decision.trim()) {
-    const match = content.match(/"decision"\s*:\s*"([\s\S]*?)"(?=\s*,\s*"|\s*\})/);
+    const match = content.match(/"decision"\s*:\s*"([\s\S]*?)"/i) || 
+                  content.match(/"recommendation"\s*:\s*"([\s\S]*?)"/i);
     decision = match ? match[1] : "";
   }
   if (!reasoning.trim()) {
-    const match = content.match(/"reasoning"\s*:\s*"([\s\S]*?)"(?=\s*,\s*"|\s*\})/);
+    const match = content.match(/"reasoning"\s*:\s*"([\s\S]*?)"/i) || 
+                  content.match(/"thesis"\s*:\s*"([\s\S]*?)"/i);
     reasoning = match ? match[1] : "";
   }
 
-  // If extraction fails completely, fall back to parsing the raw output
-  if (!companyInfo.trim() && !reasoning.trim()) {
-    companyInfo = "Analysis completed.";
-    decision = content.toUpperCase().includes("INVEST") ? "INVEST" : "PASS";
-    reasoning = content;
-  }
-
-  // Clean raw escape tokens from string
+  // Clean raw escape tokens from string helper
   const cleanText = (str) => {
     return str
       .replace(/\\n/g, "\n")
@@ -114,10 +131,25 @@ Do not include any other text besides the JSON.`;
       .trim();
   };
 
+  companyInfo = cleanText(companyInfo);
+  decision = cleanText(decision).toUpperCase();
+  reasoning = cleanText(reasoning);
+
+  // If extraction fails completely or is empty, use the raw content as reasoning fallback
+  if (!reasoning.trim()) {
+    reasoning = cleanText(content);
+  }
+  if (!companyInfo.trim()) {
+    companyInfo = "Overview details completed.";
+  }
+  if (!decision.trim()) {
+    decision = content.toUpperCase().includes("INVEST") ? "INVEST" : "PASS";
+  }
+
   return {
-    companyInfo: cleanText(companyInfo) || "No details available.",
-    decision: decision.trim().toUpperCase() === "INVEST" ? "INVEST" : "PASS",
-    reasoning: cleanText(reasoning) || "Failed to generate evaluation thesis."
+    companyInfo: companyInfo || "No details available.",
+    decision: decision === "INVEST" ? "INVEST" : "PASS",
+    reasoning: reasoning || "Failed to generate evaluation thesis."
   };
 }
 
