@@ -51,9 +51,9 @@ async function evaluateNode(state, config) {
 ${searchContent}
 
 Based on these results, provide:
-1. Some brief descriptive information about the company (Overview, main products/services, and size/financials if available).
+1. Some descriptive information about the company (Overview, main products/services, and size/financials if available).
 2. A clear investment decision (either "INVEST" or "PASS").
-3. A brief reason for this decision.
+3. A smart reason for this decision.
 
 Output a JSON object exactly matching this schema:
 {

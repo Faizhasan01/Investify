@@ -1,6 +1,4 @@
-/* ==========================================================================
-   MINIMALIST FLAT DESIGN SYSTEM (No Gradients)
-   ========================================================================== */
+
 body {
   background-color: #f6f8fa;
   color: #24292e;
@@ -48,9 +46,7 @@ body {
   margin: 0;
 }
 
-/* ==========================================================================
-   SEARCH FORM
-   ========================================================================== */
+/* SEARCH FORM */
 .search-box {
   background-color: #ffffff;
   border: 1px solid #e1e4e8;
@@ -158,9 +154,7 @@ body {
   background-color: #ffffff;
 }
 
-/* ==========================================================================
-   STATUS / LOADING & ERRORS
-   ========================================================================== */
+/* STATUS / LOADING & ERRORS */
 .status-box {
   background-color: #f1f8ff;
   border: 1px solid #c8e1ff;
@@ -198,9 +192,7 @@ body {
   margin-bottom: 20px;
 }
 
-/* ==========================================================================
-   RESULTS DASHBOARD CARD
-   ========================================================================== */
+/* RESULTS DASHBOARD CARD */
 .results-card {
   background-color: #ffffff;
   border: 1px solid #e1e4e8;
