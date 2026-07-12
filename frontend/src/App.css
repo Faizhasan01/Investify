@@ -1,0 +1,298 @@
+/* ==========================================================================
+   MINIMALIST FLAT DESIGN SYSTEM (No Gradients)
+   ========================================================================== */
+body {
+  background-color: #f6f8fa;
+  color: #24292e;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 720px;
+  margin: 60px auto;
+  padding: 0 20px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.app-logo {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+
+.header h1 {
+  font-size: 28px;
+  font-weight: 600;
+  color: #1b1f23;
+  margin: 0;
+}
+
+.header p {
+  font-size: 15px;
+  color: #586069;
+  margin: 0;
+}
+
+/* ==========================================================================
+   SEARCH FORM
+   ========================================================================== */
+.search-box {
+  background-color: #ffffff;
+  border: 1px solid #e1e4e8;
+  border-radius: 6px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  margin-bottom: 20px;
+}
+
+.input-row {
+  display: flex;
+  gap: 12px;
+}
+
+.input-row input {
+  flex: 1;
+  border: 1px solid #d1d5da;
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-size: 15px;
+  color: #24292e;
+  background-color: #fafbfc;
+}
+
+.input-row input:focus {
+  outline: none;
+  border-color: #0366d6;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(3, 102, 214, 0.15);
+}
+
+.input-row button {
+  background-color: #0969da;
+  color: #ffffff;
+  border: 1px solid rgba(27, 31, 35, 0.15);
+  border-radius: 6px;
+  padding: 10px 24px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.input-row button:hover:not(:disabled) {
+  background-color: #0c58c2;
+}
+
+.input-row button:disabled {
+  background-color: #94c3f5;
+  cursor: not-allowed;
+}
+
+.toggle-container {
+  margin-top: 12px;
+  text-align: left;
+}
+
+.toggle-link {
+  background: none;
+  border: none;
+  color: #0366d6;
+  font-size: 13px;
+  cursor: pointer;
+  padding: 0;
+}
+
+.toggle-link:hover {
+  text-decoration: underline;
+}
+
+/* Settings panel */
+.settings-panel {
+  margin-top: 20px;
+  border-top: 1px solid #e1e4e8;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #444d56;
+}
+
+.form-group input, .form-group select {
+  border: 1px solid #d1d5da;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 14px;
+  color: #24292e;
+  background-color: #fafbfc;
+}
+
+.form-group input:focus, .form-group select:focus {
+  outline: none;
+  border-color: #0366d6;
+  background-color: #ffffff;
+}
+
+/* ==========================================================================
+   STATUS / LOADING & ERRORS
+   ========================================================================== */
+.status-box {
+  background-color: #f1f8ff;
+  border: 1px solid #c8e1ff;
+  border-radius: 6px;
+  padding: 16px;
+  color: #0366d6;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(3, 102, 214, 0.2);
+  border-top-color: #0366d6;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.error-box {
+  background-color: #ffeef0;
+  border: 1px solid #ffd3d6;
+  border-radius: 6px;
+  padding: 16px;
+  color: #d73a49;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+/* ==========================================================================
+   RESULTS DASHBOARD CARD
+   ========================================================================== */
+.results-card {
+  background-color: #ffffff;
+  border: 1px solid #e1e4e8;
+  border-radius: 6px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e1e4e8;
+  padding-bottom: 16px;
+  margin-bottom: 20px;
+}
+
+.card-header h2 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #24292e;
+  margin: 0;
+}
+
+.btn-download {
+  background-color: #fafbfc;
+  color: #24292e;
+  border: 1px solid #d1d5da;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-download:hover {
+  background-color: #f3f4f6;
+  border-color: #0366d6;
+}
+
+.info-section, .decision-section, .reasoning-section {
+  margin-bottom: 20px;
+}
+
+.info-section h3, .decision-section h3, .reasoning-section h3 {
+  font-size: 12px;
+  font-weight: 600;
+  color: #6a737d;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.info-section p, .reasoning-section p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #24292e;
+  margin: 0;
+}
+
+.decision-badge {
+  font-size: 18px;
+  font-weight: 700;
+  padding: 6px 16px;
+  border-radius: 4px;
+  display: inline-block;
+  letter-spacing: 0.5px;
+}
+
+.badge-invest {
+  background-color: #2ea44f;
+  color: #ffffff;
+  border: 1px solid #248b40;
+}
+
+.badge-pass {
+  background-color: #cf222e;
+  color: #ffffff;
+  border: 1px solid #b11b24;
+}
+
+@media (max-width: 576px) {
+  .input-row {
+    flex-direction: column;
+  }
+  .input-row button {
+    width: 100%;
+  }
+  .card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}

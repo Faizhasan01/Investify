@@ -1,0 +1,8 @@
+/* Clean CSS reset so App.css can govern the application styling correctly */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
