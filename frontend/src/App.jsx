@@ -22,7 +22,7 @@ export default function App() {
     setError(null);
 
     try {
-      const response = await fetch('https://investify-wn9g.onrender.com', {
+      const response = await fetch('https://investify-wn9g.onrender.com/api/research', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
