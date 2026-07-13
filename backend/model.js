@@ -57,6 +57,23 @@ function getModel(provider, customKey, customModel, logCallback) {
     return new ChatOllamaLocal(modelName);
   }
   
+  if (finalProvider === 'deepseek') {
+    const key = customKey || process.env.DEEPSEEK_API_KEY;
+    if (!key || key.trim() === '') {
+      throw new Error('DeepSeek API Key is missing. Please enter it in the app settings or configure it in the backend .env file.');
+    }
+    const modelName = customModel || 'deepseek-chat';
+    if (logCallback) logCallback(`🤖 Initialized DeepSeek Model (${modelName})`);
+    return new ChatOpenAI({
+      apiKey: key.trim(),
+      model: modelName,
+      configuration: {
+        baseURL: 'https://api.deepseek.com/v1'
+      },
+      temperature: 0.2
+    });
+  }
+  
   if (finalProvider === 'openai') {
     const key = customKey || process.env.OPENAI_API_KEY;
     if (!key || key.trim() === '') {
@@ -75,7 +92,7 @@ function getModel(provider, customKey, customModel, logCallback) {
     if (!key || key.trim() === '') {
       throw new Error('Gemini API Key is missing. Please enter it in the app settings or configure it in the backend .env file.');
     }
-    const modelName = customModel || 'gemini-1.5-flash';
+    const modelName = customModel || 'gemini-2.5-flash';
     if (logCallback) logCallback(`🤖 Initialized Gemini Model (${modelName})`);
     return new ChatGoogleGenerativeAI({
       apiKey: key.trim(),

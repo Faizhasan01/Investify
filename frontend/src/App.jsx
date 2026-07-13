@@ -4,7 +4,7 @@ import './App.css';
 export default function App() {
   const [companyName, setCompanyName] = useState('');
   const [provider, setProvider] = useState('gemini');
-  const [modelName, setModelName] = useState('gemini-1.5-flash');
+  const [modelName, setModelName] = useState('gemini-2.5-flash');
   const [apiKey, setApiKey] = useState('');
   const [tavilyKey, setTavilyKey] = useState('');
   const [showSettings, setShowSettings] = useState(false);
@@ -179,12 +179,17 @@ export default function App() {
                   value={provider}
                   onChange={(e) => {
                     setProvider(e.target.value);
-                    setModelName(e.target.value === 'openai' ? 'gpt-4o-mini' : e.target.value === 'ollama' ? 'llama3.2' : 'gemini-1.5-flash');
+                    const defaultModel = e.target.value === 'openai' ? 'gpt-4o-mini' 
+                                       : e.target.value === 'ollama' ? 'llama3.2' 
+                                       : e.target.value === 'deepseek' ? 'deepseek-chat' 
+                                       : 'gemini-2.5-flash';
+                    setModelName(defaultModel);
                   }}
                   disabled={loading}
                 >
                   <option value="gemini">Gemini API</option>
                   <option value="openai">OpenAI API</option>
+                  <option value="deepseek">DeepSeek API</option>
                   <option value="ollama">Local Llama (Ollama)</option>
                 </select>
               </div>
@@ -204,11 +209,16 @@ export default function App() {
                       <option value="mistral">mistral</option>
                       <option value="phi3">phi3</option>
                     </>
+                  ) : provider === 'deepseek' ? (
+                    <>
+                      <option value="deepseek-chat">deepseek-chat</option>
+                      <option value="deepseek-coder">deepseek-coder</option>
+                    </>
                   ) : provider === 'gemini' ? (
                     <>
-                      <option value="gemini-1.5-flash">gemini-1.5-flash</option>
-                      <option value="gemini-1.5-flash-latest">gemini-1.5-flash-latest</option>
                       <option value="gemini-2.5-flash">gemini-2.5-flash</option>
+                      <option value="gemini-1.5-flash-latest">gemini-1.5-flash-latest</option>
+                      <option value="gemini-1.5-flash">gemini-1.5-flash</option>
                       <option value="gemini-1.5-pro">gemini-1.5-pro</option>
                     </>
                   ) : (
