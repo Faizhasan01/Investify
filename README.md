@@ -1,4 +1,4 @@
-# AI Investment Research Agent
+# AI Investment Research Agent : https://investify-drab.vercel.app/
 
 A lightweight, minimalist full-stack application that acts as an **AI Investment Research Agent**. It takes a company name, queries the web for live background/financial details, and delivers an instant investment recommendation (**INVEST** or **PASS**) with a clear reasoning thesis.
 
